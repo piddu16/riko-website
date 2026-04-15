@@ -1,172 +1,94 @@
 import type { Metadata } from "next";
-import {
-  Target,
-  Heart,
-  Lightbulb,
-  Users,
-  ShieldCheck,
-  MapPin,
-  Building2,
-} from "lucide-react";
+import Link from "next/link";
+import { Target, Heart, Zap, Users, ExternalLink } from "lucide-react";
 import { ScrollAnimate } from "@/components/scroll-animate";
+import PageHero from "@/components/page-hero";
 import CtaSection from "@/components/cta-section";
+import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "About - Riko AI",
   description:
-    "Learn about Riko AI and the team at NXTLVL Tech Solutions building the AI CFO for Indian SMEs. Our mission, story, and values.",
+    "Riko is building the AI operating layer above Tally for Indian MSMEs. Based in Mumbai, built by operators who lived the problem.",
 };
 
 const values = [
   {
     icon: Target,
-    title: "Simplicity First",
+    title: "Tally-native",
     description:
-      "We believe powerful technology should be effortless to use. If it requires a manual, we have not done our job. Every feature in Riko is designed so that any business owner can use it from day one.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Trust & Transparency",
-    description:
-      "Your financial data is sacred. We earn trust through radical transparency about how we handle data, what we access, and what we never will. Read-only access and zero data sharing are not features, they are promises.",
+      "We don't replace Tally. We sit above it. Your CA keeps doing what they do best. You just stop digging through reports to find answers.",
   },
   {
     icon: Heart,
-    title: "Built for India",
+    title: "Built for Bharat",
     description:
-      "We understand the unique challenges of running a business in India, from GST compliance headaches to multilingual teams. Riko is not a foreign product adapted for India. It is built from the ground up for Indian businesses.",
+      "Hindi, Tamil, Marathi, Gujarati, and more. Voice notes on WhatsApp. Context that matches how Indian MSMEs actually run.",
   },
   {
-    icon: Lightbulb,
-    title: "Continuous Innovation",
+    icon: Zap,
+    title: "Action, not reports",
     description:
-      "The AI landscape evolves rapidly, and so does Riko. We ship improvements every week, listen to customer feedback obsessively, and invest heavily in R&D to stay at the cutting edge of AI-powered financial intelligence.",
+      "Most tools tell you what happened. Riko tells you what to do next — and handles the routine stuff for you.",
   },
-];
-
-const team = [
-  { name: "Founder & CEO", placeholder: true },
-  { name: "CTO", placeholder: true },
-  { name: "Head of AI", placeholder: true },
-  { name: "Head of Product", placeholder: true },
-  { name: "Head of Growth", placeholder: true },
-  { name: "Lead Engineer", placeholder: true },
+  {
+    icon: Users,
+    title: "Operators first",
+    description:
+      "Built by founders who lived the pain of manual follow-ups and stale reports. Every feature came from a real customer conversation.",
+  },
 ];
 
 export default function AboutPage() {
   return (
-    <main className="bg-white">
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-slate-950 py-24 sm:py-32">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_60%_30%,rgba(34,197,94,0.15),transparent_50%)]" />
-        <div className="relative mx-auto max-w-7xl px-6 text-center lg:px-8">
+    <main>
+      <PageHero
+        eyebrow="About Riko"
+        title={<>Books of record. <span className="text-[#16A34A]">Systems of action.</span></>}
+        subtitle="Indian MSMEs have digital books but analog workflows. Owners track receivables across calls, WhatsApp, and memory. The gap between knowing and doing costs them real money. We're closing it."
+      />
+
+      <section className="bg-white py-20 lg:py-24">
+        <div className="mx-auto max-w-4xl px-6">
           <ScrollAnimate variant="fadeUp">
-            <p className="text-sm font-semibold uppercase tracking-widest text-green-400">
-              About Us
-            </p>
-            <h1 className="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
-              About Riko
-            </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-300">
-              We are on a mission to make financial intelligence accessible to every
-              Indian business, regardless of size or technical expertise.
-            </p>
-          </ScrollAnimate>
-        </div>
-      </section>
-
-      {/* Mission */}
-      <section className="py-20 sm:py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl">
-            <ScrollAnimate variant="fadeUp">
-              <div className="flex items-center gap-3">
-                <Target className="h-8 w-8 text-green-600" />
-                <h2 className="text-3xl font-bold tracking-tight text-slate-900">Our Mission</h2>
-              </div>
-              <div className="mt-6 space-y-4 text-base leading-7 text-slate-600">
-                <p>
-                  India has over 60 million SMEs, and the vast majority manage their finances on
-                  Tally. Yet most of these businesses make critical financial decisions based on
-                  gut feeling rather than data, not because they lack the data, but because
-                  extracting insights from accounting software requires expertise most small
-                  businesses do not have.
-                </p>
-                <p>
-                  Riko changes that. By combining the power of AI with deep integration into
-                  Tally, we give every business owner a virtual CFO that speaks their language,
-                  understands their context, and delivers actionable insights on demand. Whether
-                  you run a manufacturing unit in Ludhiana or a trading firm in Surat, Riko
-                  gives you the financial clarity that was previously available only to companies
-                  with dedicated finance teams.
-                </p>
-              </div>
-            </ScrollAnimate>
-          </div>
-        </div>
-      </section>
-
-      {/* Story */}
-      <section className="bg-slate-50 py-20 sm:py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl">
-            <ScrollAnimate variant="fadeUp">
-              <div className="flex items-center gap-3">
-                <Building2 className="h-8 w-8 text-green-600" />
-                <h2 className="text-3xl font-bold tracking-tight text-slate-900">Our Story</h2>
-              </div>
-              <div className="mt-6 space-y-4 text-base leading-7 text-slate-600">
-                <p>
-                  Riko is built by NXTLVL Tech Solutions Private Limited, headquartered in
-                  Mumbai. Our founding team has deep experience across fintech, enterprise
-                  software, and artificial intelligence.
-                </p>
-                <p>
-                  The idea for Riko was born from a simple observation: business owners spend
-                  hours each week chasing numbers that should be at their fingertips. They call
-                  their accountant to ask basic questions about cash flow, they manually compile
-                  reports that should be automated, and they file GST returns in a panic at the
-                  last minute.
-                </p>
-                <p>
-                  We set out to build an AI assistant that could sit on top of Tally and make
-                  all of that effortless. No complex dashboards to learn, no expensive
-                  consultants to hire. Just ask a question and get an answer, in any language,
-                  on any device.
-                </p>
-              </div>
-              <div className="mt-8 flex items-center gap-4 rounded-2xl bg-white p-5 ring-1 ring-slate-200/60">
-                <MapPin className="h-6 w-6 shrink-0 text-green-600" />
-                <div>
-                  <p className="text-sm font-semibold text-slate-900">Mumbai, India</p>
-                  <p className="text-xs text-slate-500">NXTLVL Tech Solutions Private Limited</p>
-                </div>
-              </div>
-            </ScrollAnimate>
-          </div>
-        </div>
-      </section>
-
-      {/* Values */}
-      <section className="py-20 sm:py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <ScrollAnimate variant="fadeUp">
-            <h2 className="text-center text-3xl font-bold tracking-tight text-slate-900">
-              Our Values
+            <p className="text-sm font-semibold uppercase tracking-widest text-[#16A34A]">Our mission</p>
+            <h2 className="mt-3 text-3xl font-semibold leading-[1.15] tracking-tight text-[#0B1F12] sm:text-4xl lg:text-5xl">
+              MSME finance ops should be proactive, not reactive.
             </h2>
-            <p className="mx-auto mt-4 max-w-xl text-center text-base text-slate-600">
-              The principles that guide everything we build.
-            </p>
+            <div className="mt-8 space-y-4 text-lg leading-relaxed text-slate-600">
+              <p>
+                Tally has the data. The books are digital. But the workflows are still manual, delayed, and reactive. You find out liquidity is tight <em>after</em> the cheque bounces — not before.
+              </p>
+              <p>
+                Riko sits above Tally and converts ledgers, invoices, bills, and ageing into next-best actions. AI chat. Payment reminders. MIS. Cash visibility. Owner-ready tasks.
+              </p>
+              <p className="font-medium text-[#0B1F12]">
+                We're building the AI operating layer above Tally for every Indian MSME.
+              </p>
+            </div>
+          </ScrollAnimate>
+        </div>
+      </section>
+
+      <section className="bg-[#F8FAF9] py-20 lg:py-28">
+        <div className="mx-auto max-w-6xl px-6">
+          <ScrollAnimate variant="fadeUp">
+            <div className="mx-auto max-w-2xl text-center">
+              <p className="text-sm font-semibold uppercase tracking-widest text-[#16A34A]">What we believe</p>
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-[#0B1F12] sm:text-4xl">
+                Four ideas that shape every decision
+              </h2>
+            </div>
           </ScrollAnimate>
 
-          <div className="mt-16 grid gap-8 sm:grid-cols-2">
+          <div className="mt-14 grid gap-5 sm:grid-cols-2">
             {values.map((value, i) => (
-              <ScrollAnimate key={value.title} variant="fadeUp" delay={i * 0.1}>
-                <div className="rounded-2xl bg-white p-6 ring-1 ring-slate-200/60">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-green-100 text-green-600">
-                    <value.icon className="h-6 w-6" />
+              <ScrollAnimate key={value.title} variant="fadeUp" delay={i * 0.08}>
+                <div className="h-full rounded-2xl border border-slate-200 bg-white p-8">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#22C55E]/10">
+                    <value.icon className="h-5 w-5 text-[#16A34A]" />
                   </div>
-                  <h3 className="mt-4 text-lg font-semibold text-slate-900">{value.title}</h3>
+                  <h3 className="mt-5 text-lg font-semibold text-[#0B1F12]">{value.title}</h3>
                   <p className="mt-2 text-sm leading-6 text-slate-600">{value.description}</p>
                 </div>
               </ScrollAnimate>
@@ -175,35 +97,57 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Team */}
-      <section className="border-t border-slate-100 bg-slate-50 py-20 sm:py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <section className="bg-white py-20 lg:py-28">
+        <div className="mx-auto max-w-6xl px-6">
           <ScrollAnimate variant="fadeUp">
-            <div className="text-center">
-              <Users className="mx-auto h-8 w-8 text-green-600" />
-              <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900">
-                Our Team
+            <div className="mx-auto max-w-2xl text-center">
+              <p className="text-sm font-semibold uppercase tracking-widest text-[#16A34A]">The team</p>
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-[#0B1F12] sm:text-4xl">
+                Seven operators. Close to the problem.
               </h2>
-              <p className="mx-auto mt-4 max-w-xl text-base text-slate-600">
-                A passionate team of engineers, designers, and domain experts building
-                the future of financial intelligence for Indian businesses.
+              <p className="mt-4 text-base text-slate-600">
+                Built by people with product, engineering, growth, and onboarding depth across MSME workflows.
               </p>
             </div>
           </ScrollAnimate>
 
-          <div className="mx-auto mt-16 grid max-w-4xl gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {team.map((member, i) => (
+          <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {siteConfig.team.map((member, i) => (
               <ScrollAnimate key={member.name} variant="fadeUp" delay={i * 0.08}>
-                <div className="flex flex-col items-center rounded-2xl bg-white p-6 ring-1 ring-slate-200/60">
-                  <div className="flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-green-100 to-emerald-200">
-                    <Users className="h-8 w-8 text-green-600" />
+                <div className="h-full rounded-2xl border border-slate-200 bg-[#F8FAF9] p-6 text-center">
+                  <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-[#22C55E] to-[#16A34A] text-2xl font-semibold text-white">
+                    {member.name.split(" ").map((n) => n[0]).slice(0, 2).join("")}
                   </div>
-                  <p className="mt-4 text-sm font-semibold text-slate-900">{member.name}</p>
-                  <p className="mt-1 text-xs text-slate-500">Team Member</p>
+                  <h3 className="mt-5 text-base font-semibold text-[#0B1F12]">{member.name}</h3>
+                  <p className="mt-1 text-xs text-slate-500">{member.role}</p>
+                  <Link
+                    href={member.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-4 inline-flex items-center gap-1.5 text-xs font-medium text-[#16A34A] hover:underline"
+                  >
+                    <ExternalLink className="h-3.5 w-3.5" /> LinkedIn
+                  </Link>
                 </div>
               </ScrollAnimate>
             ))}
           </div>
+
+          <ScrollAnimate variant="fadeUp">
+            <p className="mt-10 text-center text-sm text-slate-500">
+              + 3 team members across engineering, QA, customer success, and operations.
+            </p>
+          </ScrollAnimate>
+        </div>
+      </section>
+
+      <section className="bg-[#0B1F12] py-16 text-white">
+        <div className="mx-auto max-w-4xl px-6 text-center">
+          <ScrollAnimate variant="fadeUp">
+            <p className="text-sm font-semibold uppercase tracking-widest text-[#22C55E]">Company</p>
+            <h3 className="mt-3 text-2xl font-semibold">{siteConfig.company}</h3>
+            <p className="mt-2 text-slate-400">Made in {siteConfig.location}</p>
+          </ScrollAnimate>
         </div>
       </section>
 

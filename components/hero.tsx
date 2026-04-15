@@ -5,9 +5,6 @@ import { ArrowRight } from "lucide-react";
 
 const barHeights = [40, 65, 50, 80, 60, 90, 75];
 
-// Trusted-by companies (placeholder for now — swap with real logos when available)
-const trustedBy = ["Zoho", "Bajaj", "Infosys", "Flipkart", "Paytm", "Razorpay"];
-
 export default function Hero() {
   return (
     <section className="relative overflow-hidden bg-[#E8F5EC]">
@@ -77,26 +74,25 @@ export default function Hero() {
           Free forever. No credit card. Setup in 5 minutes.
         </motion.p>
 
-        {/* Trusted by */}
+        {/* Social proof */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-14"
+          className="mt-12 flex items-center justify-center gap-2"
         >
-          <p className="text-xs font-medium uppercase tracking-widest text-slate-500">
-            Trusted by finance teams at 500+ Indian businesses
-          </p>
-          <div className="mt-5 flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
-            {trustedBy.map((name) => (
-              <span
-                key={name}
-                className="text-lg font-semibold tracking-tight text-slate-400 grayscale transition hover:text-slate-600"
-              >
-                {name}
-              </span>
+          <div className="flex -space-x-2">
+            {["#22C55E", "#16A34A", "#065F46", "#22C55E"].map((c, i) => (
+              <div
+                key={i}
+                className="h-7 w-7 rounded-full border-2 border-[#E8F5EC]"
+                style={{ backgroundColor: c, opacity: 0.85 - i * 0.1 }}
+              />
             ))}
           </div>
+          <p className="text-sm text-slate-600">
+            <span className="font-semibold text-[#0B1F12]">500+ finance teams</span> across India run on Riko
+          </p>
         </motion.div>
       </div>
 

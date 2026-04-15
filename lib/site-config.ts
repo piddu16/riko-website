@@ -1,8 +1,8 @@
 export const siteConfig = {
   name: "Riko",
-  tagline: "AI Chat Assistant for Tally Users",
+  tagline: "The AI operating layer above Tally",
   description:
-    "Chat with Tally: The AI CFO for Indian SMEs. Get instant cash flow insights, GST status, and payment reminders via WhatsApp.",
+    "Riko sits above Tally and converts ledgers, invoices, bills, and ageing into next-best actions. AI chat, payment reminders, MIS, and cash visibility for Indian MSMEs.",
   url: "https://rikoai.in",
   phone: "+91 98196 02121",
   email: "hello@rikoai.in",
@@ -42,143 +42,166 @@ export const siteConfig = {
   features: [
     {
       icon: "MessageSquare",
-      title: "Natural Conversations",
+      title: "AI Chat",
       description:
-        "Ask questions in plain English or Hindi and get instant answers from your business data",
+        "Ask anything about your business data in plain language. Hindi, English, or 7+ regional languages.",
     },
     {
       icon: "BarChart3",
-      title: "Smart Analytics",
+      title: "Outstanding Tracker",
       description:
-        "AI-powered insights that predict trends and identify opportunities",
+        "Receivables by party with ageing, status, and priority. See who owes you what, instantly.",
     },
     {
       icon: "Zap",
-      title: "Instant Actions",
+      title: "AI Payment Reminders",
       description:
-        "Automate follow-ups, reminders, and routine business processes",
+        "Batch reminders via WhatsApp and Email. Auto follow-ups on a schedule you control.",
     },
     {
       icon: "FileText",
-      title: "GST Reports",
+      title: "Owner MIS Reports",
       description:
-        "Generate compliant GST reports and file returns with one click",
+        "Branded MIS reports ready for investors, lenders, or your CA. Scheduled or on demand.",
     },
     {
       icon: "TrendingUp",
-      title: "Financial Insights",
+      title: "Inventory Alerts",
       description:
-        "Real-time dashboards showing revenue, expenses, and profitability",
+        "Slow-moving stock, dead inventory, and reorder triggers surfaced automatically.",
     },
     {
       icon: "Shield",
-      title: "Secure & Compliant",
+      title: "Conversational BI",
       description:
-        "Bank-grade security with complete data privacy and compliance",
+        "Chat with your books. No SQL, no pivot tables, no training. Just answers.",
     },
   ],
+  // Real traction from investor deck
   stats: [
-    { value: "15+", label: "Hours", sublabel: "Saved Weekly", description: "Automate reports and data analysis" },
-    { value: "30%", label: "", sublabel: "Better Cash Flow", description: "Smart payment tracking and reminders" },
-    { value: "87%", label: "", sublabel: "Faster Decisions", description: "Real-time insights at your fingertips" },
-    { value: "99.9%", label: "", sublabel: "Data Accuracy", description: "AI-powered validation and checks" },
+    { value: "500+", label: "", sublabel: "Companies onboarded", description: "Across India" },
+    { value: "3,300+", label: "", sublabel: "Active users", description: "Using Riko daily" },
+    { value: "5+ min", label: "", sublabel: "Engagement depth", description: "Average session" },
+    { value: "~30%", label: "", sublabel: "Tally partner access", description: "Distribution coverage" },
   ],
+  // Read → Interpret → Act → Expand from the deck
   steps: [
     {
       number: "01",
       icon: "Database",
-      title: "Connect Tally",
+      title: "Read",
       description:
-        "Link your Tally Prime account in minutes. Secure, one-click setup — no IT team needed.",
+        "Riko pulls books, invoices, bills, ledgers, and party context directly from your Tally — securely and read-only.",
     },
     {
       number: "02",
-      icon: "MessageSquare",
-      title: "Ask Riko Anything",
+      icon: "Brain",
+      title: "Interpret",
       description:
-        "Just type 'What is my profit?' or 'Who owes me money?' in Hindi, English, or 7 regional languages.",
+        "AI detects overdues, blocked cash, reporting gaps, and priority accounts before they become problems.",
     },
     {
       number: "03",
       icon: "Zap",
-      title: "Get Answers via WhatsApp",
+      title: "Act",
       description:
-        "Riko replies with cash flow insights, payment reminders, and GST status — right on your phone.",
+        "Send reminders, summaries, nudges, and owner-ready tasks — via WhatsApp, email, or the dashboard.",
+    },
+    {
+      number: "04",
+      icon: "TrendingUp",
+      title: "Expand",
+      description:
+        "Grow into payables, MIS, working capital, and broader finance operations as your business scales.",
     },
   ],
   faqs: [
     {
-      question: "What is the best AI CFO app for Indian SMEs using Tally?",
+      question: "What exactly does Riko do?",
       answer:
-        "Riko is the leading AI-powered CFO assistant built specifically for Indian SMEs using Tally Prime. It connects directly to your Tally data and provides instant financial insights, GST reports, cash flow analysis, and payment reminders through natural conversation in English and Hindi.",
+        "Riko sits above your Tally and turns your ledgers, invoices, bills, and ageing into next-best actions. You get AI chat to ask anything about your business, automated payment reminders, outstanding trackers, MIS reports, and inventory alerts — all without touching Tally itself.",
     },
     {
-      question: "How to get MIS reports from Tally on mobile?",
+      question: "Does Riko modify my Tally data?",
       answer:
-        "With Riko, you can access all your Tally MIS reports directly on your mobile phone. Simply connect your Tally Prime account and ask Riko questions like 'Show me this month's P&L' or 'What are my top selling products?' — get instant reports via WhatsApp or the Riko app.",
+        "Never. Riko reads from Tally through a secure read-only connection. We can never create, edit, or delete entries in your Tally. Your books stay exactly as your CA left them.",
     },
     {
-      question: "Which Tally mobile app is free and secure?",
+      question: "Which languages does Riko support?",
       answer:
-        "Riko offers a free tier that lets you connect your Tally Prime data securely. We use bank-grade encryption, and your data never leaves Indian servers. Setup takes under 5 minutes with no technical knowledge required.",
+        "English, Hindi, Tamil, Marathi, Gujarati, Bengali, Telugu, and Kannada. Ask 'Kitna profit hua October mein?' or 'Who owes me more than 30 days?' — Riko understands both.",
     },
     {
-      question: "Best AI tool for Tally reports and financial forecasting?",
+      question: "How long does setup take?",
       answer:
-        "Riko combines AI-powered analytics with deep Tally integration to deliver not just reports, but predictive insights. Get cash flow forecasts, identify payment risks, track GST compliance, and receive proactive alerts — all through simple conversational queries.",
+        "Under 5 minutes. Install the lightweight Riko Connector on the machine running Tally Prime, authenticate, and you're live. No IT team needed.",
+    },
+    {
+      question: "Where is my data stored?",
+      answer:
+        "100% on Indian servers, encrypted with AES-256 at rest and in transit. SOC 2 Type II certified. We never sell, share, or use your data to train models for other customers.",
     },
   ],
+  // Real two-tier pricing from slide 8
   pricing: [
     {
-      name: "Free",
-      price: "₹0",
-      period: "forever",
-      description: "Get started with basic Tally insights",
+      name: "Basic",
+      price: "₹5,000",
+      period: "/year",
+      priceNote: "≈ ₹417 / month",
+      description: "For solo founders running a single company on Tally",
       features: [
-        "Connect 1 Tally company",
-        "50 AI queries per month",
-        "Basic financial reports",
-        "WhatsApp notifications",
-        "Email support",
+        "1 user, 1 Tally company",
+        "Receivables dashboard",
+        "AI chat (standard)",
+        "Basic payment reminders",
+        "Standard reports",
+        "Owner summary digest",
       ],
-      cta: "Start Free",
+      cta: "Start with Basic",
       highlighted: false,
     },
     {
-      name: "Pro",
-      price: "₹2,999",
-      period: "/month",
-      description: "For growing businesses that need more",
+      name: "Teams",
+      price: "₹20,000",
+      period: "/year",
+      priceNote: "≈ ₹1,667 / month",
+      description: "For growing finance teams managing multiple entities",
       features: [
-        "Connect up to 5 Tally companies",
-        "Unlimited AI queries",
-        "Advanced analytics & forecasting",
-        "GST compliance automation",
-        "Payment reminder automation",
-        "Custom dashboards",
-        "Priority support",
-        "API access",
+        "3 users with role-based access (RBAC)",
+        "Up to 3 companies + combined data view",
+        "2,000 shared AI credits",
+        "Branded / custom report downloads",
+        "Credit limits & party tagging",
+        "Custom comments & push-to-Tally",
+        "Advanced automation & MIS",
+        "WhatsApp + Email workflows",
       ],
-      cta: "Start Free Trial",
+      cta: "Start with Teams",
       highlighted: true,
     },
+  ],
+  // Real co-founders from slide 12
+  team: [
     {
-      name: "Enterprise",
-      price: "Custom",
-      period: "",
-      description: "For large organizations with custom needs",
-      features: [
-        "Unlimited Tally companies",
-        "Unlimited everything",
-        "Custom AI training on your data",
-        "Dedicated account manager",
-        "On-premise deployment option",
-        "Custom integrations",
-        "SLA guarantee",
-        "Phone & video support",
-      ],
-      cta: "Contact Sales",
-      highlighted: false,
+      name: "Bhaskara Pratap Seth",
+      role: "Co-Founder, GTM",
+      linkedin: "https://linkedin.com/in/bhaskara-seth",
+    },
+    {
+      name: "Susse Rajasekara",
+      role: "Co-Founder, Product",
+      linkedin: "https://linkedin.com/in/susse",
+    },
+    {
+      name: "Harshvardhan Vasudeva",
+      role: "Co-Founder, Ops",
+      linkedin: "https://linkedin.com/in/harshvv",
+    },
+    {
+      name: "Yogesh Kumar Sahu",
+      role: "Tech Lead",
+      linkedin: "https://linkedin.com/in/yogesh-kumar-sahu",
     },
   ],
 };
