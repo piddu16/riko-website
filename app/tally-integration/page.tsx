@@ -1,259 +1,175 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import {
   Database,
-  ArrowRight,
+  Download,
+  Settings,
+  Zap,
   Shield,
   Lock,
   Server,
   CheckCircle,
-  Download,
-  Settings,
-  Zap,
-  RefreshCw,
-  Eye,
-  MonitorSmartphone,
+  X,
+  ArrowRight,
+  Clock,
+  Cloud,
+  FileText,
 } from "lucide-react";
 import { ScrollAnimate } from "@/components/scroll-animate";
+import PageHero from "@/components/page-hero";
 import CtaSection from "@/components/cta-section";
 
 export const metadata: Metadata = {
   title: "Tally Integration - Riko AI",
   description:
-    "Seamless Tally Prime integration with Riko AI. Secure API connector with read-only access, encrypted data sync, and support for Tally Prime, Tally ERP 9, and more.",
+    "Connect Tally Prime to Riko in under 5 minutes. Secure, read-only sync. See exactly how the Riko Connector works — what it reads, what it can't touch, and why your books stay safe.",
 };
-
-const supportedPlatforms = [
-  { name: "Tally Prime", status: "Fully Supported", available: true },
-  { name: "Tally ERP 9", status: "Fully Supported", available: true },
-  { name: "Zoho Books", status: "Coming Soon", available: false },
-  { name: "Busy Accounting", status: "Coming Soon", available: false },
-];
 
 const setupSteps = [
   {
+    number: "01",
+    icon: Cloud,
+    title: "Create your Riko account",
+    time: "30 seconds",
+    description:
+      "Sign up with your work email. No credit card upfront. Pick your plan later — both come with a 14-day free trial.",
+  },
+  {
+    number: "02",
     icon: Download,
-    title: "Download the Connector",
+    title: "Download the Riko Connector",
+    time: "60 seconds",
     description:
-      "Download the lightweight Riko Connector application from your Riko dashboard. It is a small installer under 20 MB that runs on any Windows machine where Tally is installed.",
+      "A small Windows app (~8MB) that runs alongside Tally Prime. Download link appears in your dashboard after signup.",
   },
   {
+    number: "03",
     icon: Settings,
-    title: "Install & Configure",
+    title: "Install + authenticate",
+    time: "2 minutes",
     description:
-      "Run the installer and follow the guided setup wizard. Select your Tally company, authenticate with your Riko account, and choose your sync preferences. The entire process takes under 5 minutes.",
+      "Run the installer. The Connector auto-detects Tally Prime and shows your company names. Pick one, paste the pairing code from your Riko dashboard, done.",
   },
   {
-    icon: RefreshCw,
-    title: "Automatic Sync Begins",
-    description:
-      "The connector automatically syncs your Tally data to Riko's secure cloud. Initial sync takes 5 to 15 minutes depending on your data size. After that, incremental syncs happen every few minutes.",
-  },
-  {
+    number: "04",
     icon: Zap,
-    title: "Start Asking Questions",
+    title: "Start asking questions",
+    time: "Instantly",
     description:
-      "Open WhatsApp or the Riko dashboard and start querying your financial data. Riko is now connected and ready to provide instant insights from your Tally accounts.",
+      "Initial sync takes 5–10 minutes for the first load. After that, ask Riko anything on WhatsApp or the dashboard — in Hindi, English, or any supported language.",
   },
 ];
 
-const securityFeatures = [
-  {
-    icon: Eye,
-    title: "Read-Only Access",
-    description:
-      "Riko never writes to your Tally database. The connector only reads data, ensuring your accounting records remain untouched and unmodified.",
-  },
-  {
-    icon: Lock,
-    title: "End-to-End Encryption",
-    description:
-      "All data transferred between Tally and Riko is encrypted using AES-256 over TLS 1.3. Data at rest is also encrypted in our cloud infrastructure.",
-  },
-  {
-    icon: Server,
-    title: "Indian Server Infrastructure",
-    description:
-      "Your data is stored exclusively on servers located in India, ensuring compliance with data residency requirements and Indian regulations.",
-  },
-  {
-    icon: Shield,
-    title: "SOC 2 Compliant",
-    description:
-      "Our infrastructure and processes are SOC 2 Type II certified. We undergo regular third-party security audits to maintain the highest standards.",
-  },
+const permissions = {
+  can: [
+    "Read your chart of accounts",
+    "Read invoices, bills, and receipts",
+    "Read ledgers and party details",
+    "Read stock and inventory data",
+    "Read GST registration details",
+    "Read pending and completed transactions",
+  ],
+  cannot: [
+    "Create new vouchers or entries",
+    "Edit or modify existing records",
+    "Delete invoices, bills, or ledgers",
+    "Change chart of accounts",
+    "Post payments back to Tally",
+    "Alter GST configurations",
+  ],
+};
+
+const supportedSoftware = [
+  { name: "Tally Prime", status: "Full support", note: "All versions from 2.0 onwards", available: true },
+  { name: "Tally ERP 9", status: "Full support", note: "Versions 6.0+", available: true },
+  { name: "Zoho Books", status: "Beta", note: "Early access customers only", available: true },
+  { name: "Busy Accounting", status: "Coming Q2 2026", note: "On the roadmap", available: false },
 ];
 
 export default function TallyIntegrationPage() {
   return (
-    <main className="bg-white">
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-slate-950 py-24 sm:py-32">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_40%_40%,rgba(34,197,94,0.15),transparent_50%)]" />
-        <div className="relative mx-auto max-w-7xl px-6 text-center lg:px-8">
-          <ScrollAnimate variant="fadeUp">
-            <p className="text-sm font-semibold uppercase tracking-widest text-green-400">
-              Integration
-            </p>
-            <h1 className="mt-4 text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
-              Seamless Tally Prime Integration
-            </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-300">
-              Connect your Tally data securely in minutes. Read-only access, encrypted
-              sync, and zero impact on your Tally performance.
-            </p>
-          </ScrollAnimate>
-        </div>
-      </section>
+    <main>
+      <PageHero
+        eyebrow="Tally Integration"
+        title={
+          <>
+            5 minutes from install to{" "}
+            <span className="text-[#16A34A]">first insight.</span>
+          </>
+        }
+        subtitle="The Riko Connector is a tiny Windows app that sits alongside Tally Prime. It reads your books — never writes — and syncs securely to Riko's cloud so you can ask questions from anywhere."
+      />
 
-      {/* How it connects */}
-      <section className="py-20 sm:py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      {/* Data flow diagram */}
+      <section className="bg-white py-16 lg:py-24">
+        <div className="mx-auto max-w-6xl px-6">
           <ScrollAnimate variant="fadeUp">
-            <div className="text-center">
-              <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-                How Riko Connects to Tally
-              </h2>
-              <p className="mx-auto mt-4 max-w-2xl text-base text-slate-600">
-                A lightweight connector installed on your Tally machine creates a secure,
-                read-only bridge between your accounting data and Riko&apos;s AI engine.
+            <div className="rounded-2xl border border-slate-200 bg-[#F8FAF9] p-8 sm:p-12">
+              <p className="text-center text-xs font-semibold uppercase tracking-widest text-[#16A34A]">
+                How it flows
               </p>
-            </div>
-          </ScrollAnimate>
+              <h2 className="mt-3 text-center text-2xl font-semibold tracking-tight text-[#0B1F12] sm:text-3xl">
+                From your Tally to your WhatsApp
+              </h2>
 
-          <div className="mt-12 flex flex-col items-center gap-6 lg:flex-row lg:gap-4">
-            <ScrollAnimate variant="fadeLeft">
-              <div className="flex items-center gap-4">
-                <div className="flex flex-col items-center gap-2 rounded-2xl bg-blue-50 p-6 ring-1 ring-blue-100">
-                  <Database className="h-10 w-10 text-blue-600" />
-                  <p className="text-sm font-semibold text-slate-900">Tally Prime</p>
-                  <p className="text-xs text-slate-500">Your accounting data</p>
-                </div>
-              </div>
-            </ScrollAnimate>
-
-            <ScrollAnimate variant="fadeUp" delay={0.1}>
-              <ArrowRight className="h-6 w-6 rotate-90 text-slate-400 lg:rotate-0" />
-            </ScrollAnimate>
-
-            <ScrollAnimate variant="fadeUp" delay={0.15}>
-              <div className="flex flex-col items-center gap-2 rounded-2xl bg-green-50 p-6 ring-1 ring-green-100">
-                <Lock className="h-10 w-10 text-green-600" />
-                <p className="text-sm font-semibold text-slate-900">Riko Connector</p>
-                <p className="text-xs text-slate-500">Secure, read-only bridge</p>
-              </div>
-            </ScrollAnimate>
-
-            <ScrollAnimate variant="fadeUp" delay={0.2}>
-              <ArrowRight className="h-6 w-6 rotate-90 text-slate-400 lg:rotate-0" />
-            </ScrollAnimate>
-
-            <ScrollAnimate variant="fadeUp" delay={0.25}>
-              <div className="flex flex-col items-center gap-2 rounded-2xl bg-purple-50 p-6 ring-1 ring-purple-100">
-                <Server className="h-10 w-10 text-purple-600" />
-                <p className="text-sm font-semibold text-slate-900">Riko Cloud</p>
-                <p className="text-xs text-slate-500">AI-powered analysis</p>
-              </div>
-            </ScrollAnimate>
-
-            <ScrollAnimate variant="fadeUp" delay={0.3}>
-              <ArrowRight className="h-6 w-6 rotate-90 text-slate-400 lg:rotate-0" />
-            </ScrollAnimate>
-
-            <ScrollAnimate variant="fadeRight" delay={0.35}>
-              <div className="flex flex-col items-center gap-2 rounded-2xl bg-amber-50 p-6 ring-1 ring-amber-100">
-                <MonitorSmartphone className="h-10 w-10 text-amber-600" />
-                <p className="text-sm font-semibold text-slate-900">You</p>
-                <p className="text-xs text-slate-500">WhatsApp, Web, Email</p>
-              </div>
-            </ScrollAnimate>
-          </div>
-
-          {/* Data flow details */}
-          <ScrollAnimate variant="fadeUp" delay={0.2}>
-            <div className="mx-auto mt-12 max-w-3xl rounded-2xl border border-slate-200 bg-slate-50 p-8">
-              <h3 className="text-center text-base font-semibold text-slate-900">
-                Data Flow Summary
-              </h3>
-              <div className="mt-6 space-y-4 text-sm text-slate-600">
-                <div className="flex items-start gap-3">
-                  <CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-green-500" />
-                  <p>
-                    <strong className="text-slate-900">Outbound only:</strong> Data flows from Tally to Riko.
-                    Riko never sends data back to Tally or modifies your records.
-                  </p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-green-500" />
-                  <p>
-                    <strong className="text-slate-900">Incremental sync:</strong> After the initial sync,
-                    only new and changed records are transferred, minimizing bandwidth usage.
-                  </p>
-                </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-green-500" />
-                  <p>
-                    <strong className="text-slate-900">Zero performance impact:</strong> The connector is
-                    designed to be lightweight and will not slow down your Tally operations.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </ScrollAnimate>
-        </div>
-      </section>
-
-      {/* Supported platforms */}
-      <section className="border-t border-slate-100 bg-slate-50 py-20">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <ScrollAnimate variant="fadeUp">
-            <h2 className="text-center text-3xl font-bold tracking-tight text-slate-900">
-              Supported Platforms
-            </h2>
-            <p className="mx-auto mt-4 max-w-xl text-center text-base text-slate-600">
-              Riko currently integrates with Tally Prime and Tally ERP 9, with more
-              accounting platforms on the way.
-            </p>
-          </ScrollAnimate>
-
-          <div className="mx-auto mt-12 grid max-w-3xl gap-4 sm:grid-cols-2">
-            {supportedPlatforms.map((platform, i) => (
-              <ScrollAnimate key={platform.name} variant="fadeUp" delay={i * 0.1}>
-                <div className="flex items-center gap-4 rounded-2xl bg-white p-5 ring-1 ring-slate-200/60">
-                  <Database className={`h-8 w-8 ${platform.available ? "text-green-600" : "text-slate-400"}`} />
-                  <div>
-                    <p className="text-sm font-semibold text-slate-900">{platform.name}</p>
-                    <p className={`text-xs ${platform.available ? "text-green-600" : "text-slate-400"}`}>
-                      {platform.status}
-                    </p>
+              <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-5 sm:gap-2">
+                {[
+                  { icon: Database, label: "Tally Prime", sub: "On your PC" },
+                  { icon: Lock, label: "Riko Connector", sub: "Read-only · AES-256" },
+                  { icon: Cloud, label: "Riko Cloud", sub: "Mumbai servers" },
+                  { icon: Server, label: "AI Engine", sub: "NLP + analytics" },
+                  { icon: Zap, label: "You", sub: "WhatsApp · Web" },
+                ].map((node, i, arr) => (
+                  <div key={node.label} className="flex items-center sm:flex-col sm:text-center">
+                    <div className="flex-1 sm:flex-initial">
+                      <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-white shadow-sm ring-1 ring-slate-200">
+                        <node.icon className="h-6 w-6 text-[#16A34A]" strokeWidth={1.5} />
+                      </div>
+                      <p className="mt-3 text-sm font-semibold text-[#0B1F12]">{node.label}</p>
+                      <p className="mt-0.5 text-xs text-slate-500">{node.sub}</p>
+                    </div>
+                    {i < arr.length - 1 && (
+                      <ArrowRight className="mx-auto hidden h-4 w-4 shrink-0 rotate-90 text-[#22C55E] sm:block sm:rotate-0" />
+                    )}
                   </div>
-                  {platform.available && <CheckCircle className="ml-auto h-5 w-5 text-green-500" />}
-                </div>
-              </ScrollAnimate>
-            ))}
-          </div>
+                ))}
+              </div>
+            </div>
+          </ScrollAnimate>
         </div>
       </section>
 
       {/* Setup steps */}
-      <section className="py-20 sm:py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <section className="bg-[#F8FAF9] py-20 lg:py-28">
+        <div className="mx-auto max-w-6xl px-6">
           <ScrollAnimate variant="fadeUp">
-            <h2 className="text-center text-3xl font-bold tracking-tight text-slate-900">
-              Setup in 4 Easy Steps
-            </h2>
+            <div className="mx-auto max-w-2xl text-center">
+              <p className="text-sm font-semibold uppercase tracking-widest text-[#16A34A]">Setup</p>
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-[#0B1F12] sm:text-4xl">
+                Four steps. Under five minutes.
+              </h2>
+              <p className="mt-4 text-lg text-slate-600">
+                No IT team needed. No server changes. If you can install Tally, you can install Riko.
+              </p>
+            </div>
           </ScrollAnimate>
 
-          <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {setupSteps.map((step, i) => (
-              <ScrollAnimate key={step.title} variant="fadeUp" delay={i * 0.1}>
-                <div className="relative rounded-2xl bg-white p-6 ring-1 ring-slate-200/60">
-                  <div className="absolute -top-4 left-6 flex h-8 w-8 items-center justify-center rounded-full bg-green-500 text-xs font-bold text-white">
-                    {i + 1}
+              <ScrollAnimate key={step.number} variant="fadeUp" delay={i * 0.08}>
+                <div className="relative h-full rounded-2xl border border-slate-200 bg-white p-6">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold uppercase tracking-widest text-[#16A34A]">
+                      {step.number}
+                    </span>
+                    <span className="inline-flex items-center gap-1 rounded-full bg-slate-50 px-2 py-1 text-[10px] font-medium text-slate-600">
+                      <Clock className="h-3 w-3" /> {step.time}
+                    </span>
                   </div>
-                  <div className="mt-2 flex h-12 w-12 items-center justify-center rounded-xl bg-green-100 text-green-600">
-                    <step.icon className="h-6 w-6" />
+                  <div className="mt-5 flex h-11 w-11 items-center justify-center rounded-xl bg-[#22C55E]/10">
+                    <step.icon className="h-5 w-5 text-[#16A34A]" />
                   </div>
-                  <h3 className="mt-4 text-base font-semibold text-slate-900">{step.title}</h3>
+                  <h3 className="mt-5 text-base font-semibold text-[#0B1F12]">{step.title}</h3>
                   <p className="mt-2 text-sm leading-6 text-slate-600">{step.description}</p>
                 </div>
               </ScrollAnimate>
@@ -262,37 +178,166 @@ export default function TallyIntegrationPage() {
         </div>
       </section>
 
-      {/* Security */}
-      <section className="border-t border-slate-100 bg-slate-50 py-20 sm:py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      {/* Read vs Can't — the trust section */}
+      <section className="bg-white py-20 lg:py-28">
+        <div className="mx-auto max-w-6xl px-6">
           <ScrollAnimate variant="fadeUp">
-            <div className="text-center">
-              <Shield className="mx-auto h-10 w-10 text-green-600" />
-              <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900">
-                Enterprise-Grade Security
+            <div className="mx-auto max-w-2xl text-center">
+              <p className="text-sm font-semibold uppercase tracking-widest text-[#16A34A]">
+                Read-only, always
+              </p>
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-[#0B1F12] sm:text-4xl">
+                What Riko can and can&apos;t do
               </h2>
-              <p className="mx-auto mt-4 max-w-xl text-base text-slate-600">
-                Your financial data deserves the highest level of protection. Here is how
-                we keep it safe.
+              <p className="mt-4 text-lg text-slate-600">
+                Transparency is the whole point. Your books stay exactly as your CA left them.
               </p>
             </div>
           </ScrollAnimate>
 
-          <div className="mt-16 grid gap-8 sm:grid-cols-2">
-            {securityFeatures.map((feat, i) => (
-              <ScrollAnimate key={feat.title} variant="fadeUp" delay={i * 0.1}>
-                <div className="flex items-start gap-4 rounded-2xl bg-white p-6 ring-1 ring-slate-200/60">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-green-100 text-green-600">
-                    <feat.icon className="h-6 w-6" />
+          <div className="mt-14 grid gap-6 lg:grid-cols-2">
+            <ScrollAnimate variant="fadeLeft">
+              <div className="h-full rounded-2xl border border-[#22C55E]/30 bg-[#E8F5EC]/40 p-8">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#22C55E]">
+                    <CheckCircle className="h-5 w-5 text-white" />
                   </div>
-                  <div>
-                    <h3 className="text-base font-semibold text-slate-900">{feat.title}</h3>
-                    <p className="mt-2 text-sm leading-6 text-slate-600">{feat.description}</p>
+                  <h3 className="text-lg font-semibold text-[#0B1F12]">Riko can read</h3>
+                </div>
+                <ul className="mt-6 space-y-3">
+                  {permissions.can.map((p) => (
+                    <li key={p} className="flex items-start gap-3 text-sm text-[#0B1F12]">
+                      <CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-[#16A34A]" />
+                      {p}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </ScrollAnimate>
+
+            <ScrollAnimate variant="fadeRight">
+              <div className="h-full rounded-2xl border border-slate-200 bg-slate-50 p-8">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-400">
+                    <X className="h-5 w-5 text-white" />
                   </div>
+                  <h3 className="text-lg font-semibold text-[#0B1F12]">Riko cannot</h3>
+                </div>
+                <ul className="mt-6 space-y-3">
+                  {permissions.cannot.map((p) => (
+                    <li key={p} className="flex items-start gap-3 text-sm text-slate-600">
+                      <X className="mt-0.5 h-4 w-4 shrink-0 text-slate-400" />
+                      {p}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </ScrollAnimate>
+          </div>
+        </div>
+      </section>
+
+      {/* Supported software */}
+      <section className="bg-[#F8FAF9] py-20 lg:py-28">
+        <div className="mx-auto max-w-5xl px-6">
+          <ScrollAnimate variant="fadeUp">
+            <div className="mx-auto max-w-2xl text-center">
+              <p className="text-sm font-semibold uppercase tracking-widest text-[#16A34A]">
+                Compatibility
+              </p>
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-[#0B1F12] sm:text-4xl">
+                Works with what you already have
+              </h2>
+            </div>
+          </ScrollAnimate>
+
+          <div className="mt-12 overflow-hidden rounded-2xl border border-slate-200 bg-white">
+            {supportedSoftware.map((sw, i) => (
+              <ScrollAnimate key={sw.name} variant="fadeUp" delay={i * 0.06}>
+                <div
+                  className={`flex items-center justify-between gap-4 p-6 ${
+                    i !== supportedSoftware.length - 1 ? "border-b border-slate-100" : ""
+                  }`}
+                >
+                  <div className="flex items-center gap-4">
+                    <div
+                      className={`flex h-11 w-11 items-center justify-center rounded-xl ${
+                        sw.available ? "bg-[#22C55E]/10" : "bg-slate-100"
+                      }`}
+                    >
+                      <FileText
+                        className={`h-5 w-5 ${sw.available ? "text-[#16A34A]" : "text-slate-400"}`}
+                      />
+                    </div>
+                    <div>
+                      <p className="text-base font-semibold text-[#0B1F12]">{sw.name}</p>
+                      <p className="text-xs text-slate-500">{sw.note}</p>
+                    </div>
+                  </div>
+                  <span
+                    className={`rounded-full px-3 py-1 text-xs font-semibold ${
+                      sw.available
+                        ? "bg-[#22C55E]/10 text-[#16A34A]"
+                        : "bg-slate-100 text-slate-500"
+                    }`}
+                  >
+                    {sw.status}
+                  </span>
                 </div>
               </ScrollAnimate>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Security */}
+      <section className="bg-white py-20 lg:py-28">
+        <div className="mx-auto max-w-6xl px-6">
+          <ScrollAnimate variant="fadeUp">
+            <div className="mx-auto max-w-2xl text-center">
+              <p className="text-sm font-semibold uppercase tracking-widest text-[#16A34A]">
+                Security
+              </p>
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight text-[#0B1F12] sm:text-4xl">
+                Bank-grade. Indian servers. Always.
+              </h2>
+            </div>
+          </ScrollAnimate>
+
+          <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { icon: Lock, title: "AES-256 encryption", desc: "End-to-end encryption in transit and at rest." },
+              { icon: Server, title: "Indian servers", desc: "All data stored in Mumbai. Never leaves India." },
+              { icon: Shield, title: "SOC 2 Type II", desc: "Annual third-party security audits." },
+              { icon: Database, title: "Read-only access", desc: "Physical inability to modify your books." },
+            ].map((item, i) => (
+              <ScrollAnimate key={item.title} variant="fadeUp" delay={i * 0.08}>
+                <div className="h-full rounded-2xl border border-slate-200 bg-[#F8FAF9] p-6">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#22C55E]/10">
+                    <item.icon className="h-5 w-5 text-[#16A34A]" />
+                  </div>
+                  <h3 className="mt-5 text-base font-semibold text-[#0B1F12]">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-slate-600">{item.desc}</p>
+                </div>
+              </ScrollAnimate>
+            ))}
+          </div>
+
+          <ScrollAnimate variant="fadeUp">
+            <div className="mt-10 rounded-2xl border border-slate-200 bg-[#F8FAF9] p-8 text-center">
+              <p className="text-base text-slate-700">
+                Read more about our{" "}
+                <Link href="/privacy-policy" className="font-semibold text-[#16A34A] hover:underline">
+                  privacy policy
+                </Link>{" "}
+                and{" "}
+                <Link href="#" className="font-semibold text-[#16A34A] hover:underline">
+                  security architecture
+                </Link>
+                .
+              </p>
+            </div>
+          </ScrollAnimate>
         </div>
       </section>
 
