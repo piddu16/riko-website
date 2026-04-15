@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-inter);
+  --color-green-500: #22C55E;
+  --color-green-600: #16A34A;
+}
+
+html {
+  scroll-behavior: smooth;
+}
