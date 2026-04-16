@@ -1,54 +1,88 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight, Send } from "lucide-react";
 
 const barHeights = [40, 65, 50, 80, 60, 90, 75];
 
+// Words that cycle in the headline
+const cyclingPhrases = [
+  "talk back.",
+  "chase payments.",
+  "file GST.",
+  "spot risks.",
+  "send reminders.",
+  "predict cash flow.",
+];
+
 export default function Hero() {
+  const [currentPhrase, setCurrentPhrase] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentPhrase((prev) => (prev + 1) % cyclingPhrases.length);
+    }, 2800);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section className="relative overflow-hidden bg-[#E8F5EC]">
       {/* Soft gradient haze */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(34,197,94,0.15),transparent_60%)]" />
 
-      <div className="relative mx-auto max-w-6xl px-6 pt-24 pb-16 text-center lg:pt-32">
-        {/* Eyebrow */}
+      <div className="relative mx-auto max-w-6xl px-6 pt-28 pb-16 text-center lg:pt-36">
+        {/* Eyebrow — stagger 1 */}
         <motion.p
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
           className="text-sm font-medium text-[#166534]"
         >
-          Riko Intelligence · For Indian SMEs
+          Riko Intelligence · The AI operating layer above Tally
         </motion.p>
 
-        {/* Headline */}
+        {/* Headline with cycling word — stagger 2 */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="mx-auto mt-6 max-w-4xl text-5xl font-semibold leading-[1.05] tracking-tight text-[#0B1F12] sm:text-6xl lg:text-7xl"
+          transition={{ duration: 0.6, delay: 0.25 }}
+          className="mx-auto mt-6 max-w-4xl text-5xl font-semibold leading-[1.08] tracking-tight text-[#0B1F12] sm:text-6xl lg:text-7xl"
         >
-          Your books, but <span className="text-[#16A34A]">they talk back.</span>
+          Your books, but they{" "}
+          <span className="relative inline-block overflow-hidden align-bottom text-[#16A34A]" style={{ minWidth: "5ch" }}>
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={cyclingPhrases[currentPhrase]}
+                initial={{ y: "100%", opacity: 0 }}
+                animate={{ y: "0%", opacity: 1 }}
+                exit={{ y: "-100%", opacity: 0 }}
+                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                className="inline-block"
+              >
+                {cyclingPhrases[currentPhrase]}
+              </motion.span>
+            </AnimatePresence>
+          </span>
         </motion.h1>
 
-        {/* Subhead */}
+        {/* Subhead — stagger 3 */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.6, delay: 0.45 }}
           className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-slate-700 sm:text-xl"
         >
-          Ask Riko anything about your Tally data — in Hindi, English, or
-          WhatsApp voice notes. Cash flow, GST, receivables, overdue invoices.
-          Answers before your chai goes cold.
+          Riko sits above Tally and turns your ledgers, invoices, and
+          ageing into next-best actions — in Hindi, English, or WhatsApp
+          voice notes.
         </motion.p>
 
-        {/* CTA row: email + button */}
+        {/* CTA row — stagger 4 */}
         <motion.form
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
           onSubmit={(e) => e.preventDefault()}
           className="mx-auto mt-10 flex max-w-md flex-col gap-3 sm:flex-row"
         >
@@ -61,24 +95,24 @@ export default function Hero() {
             type="submit"
             className="inline-flex items-center justify-center gap-2 rounded-full bg-[#0B1F12] px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#16A34A]"
           >
-            Get started for free <ArrowRight className="h-4 w-4" />
+            Get started free <ArrowRight className="h-4 w-4" />
           </button>
         </motion.form>
 
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          transition={{ duration: 0.5, delay: 0.75 }}
           className="mt-4 text-xs text-slate-500"
         >
-          Free forever. No credit card. Setup in 5 minutes.
+          Free 14-day trial. No credit card. Setup in 5 minutes.
         </motion.p>
 
-        {/* Social proof */}
+        {/* Social proof — stagger 5 */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
+          transition={{ duration: 0.6, delay: 0.9 }}
           className="mt-12 flex items-center justify-center gap-2"
         >
           <div className="flex -space-x-2">
@@ -96,13 +130,13 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Dashboard preview */}
+      {/* Dashboard product mockup — scales in like Ramp */}
       <div className="relative mx-auto max-w-6xl px-6 pb-20">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.6 }}
-          className="relative mx-auto rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_20px_60px_-20px_rgba(16,185,129,0.25)] sm:p-8"
+          initial={{ opacity: 0, y: 60, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.8, delay: 1.0, ease: [0.22, 1, 0.36, 1] }}
+          className="relative mx-auto rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_30px_80px_-20px_rgba(16,185,129,0.3)] sm:p-8"
         >
           {/* Chrome bar */}
           <div className="mb-6 flex items-center justify-between border-b border-slate-100 pb-4">
@@ -110,7 +144,9 @@ export default function Hero() {
               <div className="h-2.5 w-2.5 rounded-full bg-slate-200" />
               <div className="h-2.5 w-2.5 rounded-full bg-slate-200" />
               <div className="h-2.5 w-2.5 rounded-full bg-slate-200" />
-              <span className="ml-3 text-xs font-medium text-slate-500">Riko · Business Overview</span>
+              <span className="ml-3 text-xs font-medium text-slate-500">
+                Riko · Business Overview
+              </span>
             </div>
             <div className="flex items-center gap-2 rounded-full bg-[#22C55E]/10 px-3 py-1 text-xs font-medium text-[#16A34A]">
               <span className="relative flex h-2 w-2">
@@ -121,22 +157,28 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Stat cards */}
+          {/* Stat cards — stagger in */}
           <div className="mb-6 grid gap-4 sm:grid-cols-3">
             {[
-              { label: "Revenue (Oct)", value: "₹24.9L", change: "+32%" },
-              { label: "Profit margin", value: "18.4%", change: "+4.2%" },
-              { label: "GST status", value: "Filed", change: "On time" },
+              { label: "Revenue (Oct)", value: "₹24.9L", change: "+32%", delay: 1.3 },
+              { label: "Profit margin", value: "18.4%", change: "+4.2%", delay: 1.4 },
+              { label: "GST status", value: "Filed", change: "On time", delay: 1.5 },
             ].map((s) => (
-              <div key={s.label} className="rounded-xl bg-slate-50 p-4 text-left">
+              <motion.div
+                key={s.label}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: s.delay }}
+                className="rounded-xl bg-slate-50 p-4 text-left"
+              >
                 <p className="text-xs font-medium text-slate-500">{s.label}</p>
                 <p className="mt-1 text-2xl font-semibold text-[#0B1F12]">{s.value}</p>
                 <p className="mt-0.5 text-xs font-medium text-[#16A34A]">{s.change}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
 
-          {/* Bar chart + caption */}
+          {/* Bar chart with stagger */}
           <div className="rounded-xl bg-slate-50 p-5 text-left">
             <div className="mb-4 flex items-baseline justify-between">
               <p className="text-sm font-semibold text-[#0B1F12]">Monthly revenue</p>
@@ -147,10 +189,16 @@ export default function Hero() {
                 <motion.div
                   key={i}
                   className="flex-1 rounded-md"
-                  style={{ background: "linear-gradient(to top, #16A34A, #22C55E)" }}
+                  style={{
+                    background: "linear-gradient(to top, #16A34A, #22C55E)",
+                  }}
                   initial={{ height: 0 }}
                   animate={{ height: `${h}%` }}
-                  transition={{ duration: 0.6, delay: 0.9 + i * 0.08, ease: "easeOut" }}
+                  transition={{
+                    duration: 0.5,
+                    delay: 1.6 + i * 0.08,
+                    ease: "easeOut",
+                  }}
                 />
               ))}
             </div>
