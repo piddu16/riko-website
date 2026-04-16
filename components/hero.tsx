@@ -9,11 +9,11 @@ const barHeights = [40, 65, 50, 80, 60, 90, 75];
 // Words that cycle in the headline
 const cyclingPhrases = [
   "talk back.",
-  "chase payments.",
+  "chase dues.",
   "file GST.",
   "spot risks.",
-  "send reminders.",
-  "predict cash flow.",
+  "send nudges.",
+  "save hours.",
 ];
 
 export default function Hero() {
@@ -47,10 +47,10 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.25 }}
-          className="mx-auto mt-6 max-w-4xl text-5xl font-semibold leading-[1.08] tracking-tight text-[#0B1F12] sm:text-6xl lg:text-7xl"
+          className="mx-auto mt-6 max-w-4xl text-[2.25rem] font-semibold leading-[1.1] tracking-tight text-[#0B1F12] sm:text-5xl md:text-6xl lg:text-7xl"
         >
           Your books, but they{" "}
-          <span className="relative inline-block overflow-hidden align-bottom text-[#16A34A]" style={{ minWidth: "5ch" }}>
+          <span className="relative inline-block overflow-hidden whitespace-nowrap align-bottom text-[#16A34A]" style={{ minWidth: "5ch" }}>
             <AnimatePresence mode="wait">
               <motion.span
                 key={cyclingPhrases[currentPhrase]}
